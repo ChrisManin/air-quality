@@ -7,17 +7,21 @@
           <City :city="city" />
         </div>
       </div>
+
+      <CityForm />
     </div>
   </div>
 </template>
 
 <script>
 import City from "@/components/City";
+import CityForm from "@/components/CityForm";
 
 export default {
   name: "App",
   components: {
-    City
+    City,
+    CityForm
   },
   data() {
     return {
