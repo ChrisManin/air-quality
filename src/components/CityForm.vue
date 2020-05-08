@@ -22,7 +22,7 @@ export default {
     methods: {
         addCityAction() {
             if(this.newCity) {
-                console.log("Ajouter", this.newCity);
+                this.$emit("cityAddEvent", this.newCity);
             }
         }
     },
