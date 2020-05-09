@@ -21,6 +21,7 @@ import CityForm from "@/components/CityForm";
 import Alert from "@/components/Alert";
 
 import { AirQualityService } from "@/services/AirQuality.service";
+import { CitiesService } from "@/services/Cities.service";
 
 export default {
   name: "App",
@@ -31,15 +32,14 @@ export default {
   },
   data() {
     return {
-      cities: [
-        { name: "Lyon", iqa: null },
-        { name: "Paris", iqa: null },
-        { name: "Grenoble", iqa: null }
-      ],
+      cities: [],
       typeAlert: "",
       messageAlert: "",
       showAlert: false
     };
+  },
+  mounted() {
+    this.cities = CitiesService.getCities();
   },
   methods: {
     async addCityAction(cityName) {
