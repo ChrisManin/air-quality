@@ -8,6 +8,8 @@ import 'bootstrap-vue/dist/bootstrap-vue.css';
 
 import Home from '@/components/pages/Home';
 import Admin from '@/components/pages/Admin';
+import Login from '@/components/pages/Login';
+
 
 import './assets/custom.scss';
 
@@ -19,7 +21,8 @@ Vue.config.productionTip = false;
 
 const routes = [
   { path: "/", component: Home },
-  { path: "/admin", component: Admin }
+  { path: "/admin", component: Admin },
+  { path: "/login", component: Login }
 ];
 
 const router = new VueRouter({
