@@ -14,7 +14,10 @@
     </div>
 
     <ul>
-      <li v-for="city of cities" :key="city.id">{{ city.name }}</li>
+      <li v-for="city of cities" :key="city.id">
+        {{ city.name }} -
+        <b-button @click="deleteCity(city)">Supprimer</b-button>
+      </li>
     </ul>
   </div>
 </template>
@@ -31,7 +34,6 @@ export default {
   },
   async mounted() {
     this.cities = await CitiesService.getCities();
-    console.log(this.cities);
   },
   methods: {
     async addCityAction() {
@@ -39,6 +41,14 @@ export default {
       const idCity = await CitiesService.addCity(city);
       city.id = idCity;
       this.cities.push(city);
+    },
+    deleteCity(city) {
+      CitiesService.deleteCity(city);
+      const indexToDelete = this.cities.findIndex(
+        cityItem => city.id === cityItem.id
+      );
+
+      this.cities.splice(indexToDelete, 1);
     }
   }
 };

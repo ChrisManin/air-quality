@@ -1,8 +1,9 @@
 import { db } from "@/firebase";
 
+const citiesRef = db.collection("cities");
+
 export const CitiesService = {
   async getCities() {
-    const citiesRef = db.collection("cities");
     const citiesDoc = await citiesRef.get();
 
     const cities = citiesDoc.docs.map((city) =>
@@ -12,8 +13,11 @@ export const CitiesService = {
     return cities;
   },
   async addCity(city) {
-    const citiesRef = db.collection("cities");
     const result = await citiesRef.add(city);
     return result.id;
   },
+  deleteCity(city) {
+    const citiesRefDelete = citiesRef.doc(city.id);
+    citiesRefDelete.delete();
+  }
 };
