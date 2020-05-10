@@ -17,6 +17,7 @@
 </template>
 
 <script>
+import { auth } from "@/firebase";
 export default {
   data() {
     return {
@@ -26,12 +27,17 @@ export default {
     };
   },
   methods: {
-      submitAction(evt) {
-          evt.preventDefault();
-          console.log({email:this.email, password:this.password});
-
+    async submitAction(evt) {
+      evt.preventDefault();
+      try {
+        await auth.signInWithEmailAndPassword(this.email, this.password);
+        console.log("succes !");
+      } catch (error) {
+        this.messageError = "Erreur de Login/Mot de passe";
+        console.log("error", error);
       }
-  },
+    }
+  }
 };
 </script>
 
