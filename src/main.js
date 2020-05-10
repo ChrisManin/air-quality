@@ -13,6 +13,8 @@ import Login from '@/components/pages/Login';
 
 import './assets/custom.scss';
 
+import { auth } from "@/firebase";
+
 Vue.use(VueRouter);
 Vue.use(BootstrapVue);
 Vue.use(IconsPlugin);
@@ -21,13 +23,24 @@ Vue.config.productionTip = false;
 
 const routes = [
   { path: "/", component: Home },
-  { path: "/admin", component: Admin },
+  { path: "/admin", component: Admin, meta: {needAuth:true} },
   { path: "/login", component: Login }
 ];
 
 const router = new VueRouter({
   mode: "history",
   routes
+});
+
+router.beforeEach((to, from, next) => {
+  const isAuthenticated = auth.currentUser;
+  const isProtected = to.matched.some(route=>route.meta.needAuth)
+
+  if(!isAuthenticated && isProtected) {
+    next("/login");
+  } else {
+    next();
+  }
 })
 
 new Vue({
