@@ -3,11 +3,11 @@
     <h1>Connexion</h1>
     <b-form @submit="submitAction">
       <b-form-group label="Adresse email">
-        <b-form-input v-model="email" type="email"></b-form-input>
+        <b-form-input @change="initMessageError" v-model="email" type="email"></b-form-input>
       </b-form-group>
 
       <b-form-group label="Mot de passe">
-        <b-form-input v-model="password" type="password" />
+        <b-form-input @change="initMessageError" v-model="password" type="password" />
       </b-form-group>
       <b-button type="submit" variant="primary">Connexion</b-button>
 
@@ -31,11 +31,13 @@ export default {
       evt.preventDefault();
       try {
         await auth.signInWithEmailAndPassword(this.email, this.password);
-        console.log("succes !");
+        this.$router.replace({ path: "/admin" });
       } catch (error) {
         this.messageError = "Erreur de Login/Mot de passe";
-        console.log("error", error);
       }
+    },
+    initMessageError() {
+        this.messageError = false;
     }
   }
 };
