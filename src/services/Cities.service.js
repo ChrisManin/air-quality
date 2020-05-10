@@ -1,9 +1,12 @@
+import { db } from "@/firebase";
+
 export const CitiesService = {
-  getCities() {
-    return [
-      { name: "Lyon", iqa: null },
-      { name: "Paris", iqa: null },
-      { name: "Grenoble", iqa: null },
-    ];
+  async getCities() {
+    const citiesRef = db.collection("cities");
+    const citiesDoc = await citiesRef.get();
+
+    const cities = citiesDoc.docs.map((city) => city.data());
+
+    return cities;
   },
 };

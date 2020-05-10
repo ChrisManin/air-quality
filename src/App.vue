@@ -38,8 +38,8 @@ export default {
       showAlert: false
     };
   },
-  mounted() {
-    this.cities = CitiesService.getCities();
+  async mounted() {
+    this.cities = await CitiesService.getCities();
   },
   methods: {
     async addCityAction(cityName) {
