@@ -1,9 +1,15 @@
 # air-quality
 
 ## subject
-Little application to get the air quality by cities
+---
+Little application to get the air quality by cities. This project was generated with Vue CLI version 6.9.0.
+
+## Development Server
+---
+Run `npm run serve` for a dev server. Navigate to http://localhost:8080. The app will automatically reload if you change any of the source files.
 
 ## Libraries
+---
 - Axios : for asynchronous HTTP requests on REST APIs.
 - BootstrapVue for style.
 - VueRouter for routing.
